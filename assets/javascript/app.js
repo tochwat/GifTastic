@@ -26,12 +26,14 @@ $(document).ready(() => {
         console.log("new button: "+newButton);
 
         $('#userInput').val('');
+
+        $('#buttons').append('<button data-person="' + newButton + '">' + newButton + '</button>')
     });
 
 
 
 
-    $(".gifButton").on("click", function() {
+    $(document).on("click", "button", function() {
         var person = $(this).attr("data-person");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         person + "&api_key=dc6zaTOxFJmzC&limit=5&rating=g";
