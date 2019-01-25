@@ -1,18 +1,4 @@
 $(document).ready(() => {
-
-
-    // $("#userButton").attr("onclick", "createButton()");
-
-    // var createButton = function() {
-    //   var userButton = document.getElementById("userInput").value;
-    //   console.log(userButton);
-
-    // }
-    // $("#userInput").keyup(function(){
-    //   // alert($(this).val());
-    //   var userButton = $("#userInput").val();
-    //   console.log(userButton);
-    // });
     
     $('#userInput').on('click', function () {
       $('#userInput').val('');
@@ -36,39 +22,50 @@ $(document).ready(() => {
     $(document).on("click", "button", function() {
         var person = $(this).attr("data-person");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        person + "&api_key=dc6zaTOxFJmzC&limit=5&rating=g";
+        person + "&api_key=Iu7O2yvrkQkP0gGkAWyITP4oK1rspQjn&limit=10&rating=g";
   
         $.ajax({
           url: queryURL,
           method: "GET"
         })
           .then(function(response) {
-            //create a results variable equal to the response's data attributes
             var results = response.data;
             console.log(results);
-            //create a for loop that runs for the length of the results array of objects (10 gifs)
             for (var i = 0; i < results.length; i++) {
-              //create a variable that is equal to a div element
               var gifDiv = $("<div>");
-              //create a variable that's set to the object's rating 
+
               var rating = results[i].rating;
-              //create a variable that's set to a paragraph element that then displays the rating
               var p = $("<p>").text("Rating: " + rating);
-              // create a variable set to an image element
+
               var personImage = $("<img>");
-              // set the image element's src attrivute to the object's image url
-              personImage.attr("src", results[i].images.fixed_height.url);
+              personImage.attr("src", results[i].images.fixed_height_still.url);
+              personImage.attr("data-still", results[i].images.fixed_height_still.url);
+              personImage.attr("data-animate", results[i].images.fixed_height.url);
   
-              //prepend the p element with the rating to the gifDiv
+              personImage.addClass("gif");
+              personImage.attr("data-state", "still");
+
               gifDiv.prepend(p);
-              //prepend the gif to the gifDiv
               gifDiv.prepend(personImage);
               
-              // prepend the whole gifDiv to the page in the correct div
               $("#gifs-appear-here").prepend(gifDiv);
   
             }
           });
+      });
+
+      $(document).on("click", ".gif", function() {
+        var state = $(this).attr('data-state');
+        
+        if (state === "still") {
+          $(this).attr('src', $(this).attr('data-animate'));
+          $(this).attr('data-state', 'animate');
+        } else {
+          $(this).attr('src', $(this).attr('data-still'));
+          $(this).attr('data-state', 'still');
+  
+        }
+  
       });
 
 
