@@ -15,6 +15,8 @@ $(document).ready(() => {
     var generateButtons = function() {
       for (var i=0; i<topics.length; i++) {
           var $button = $("<button>");
+          $button.attr("type", "button");
+          $button.addClass("btn btn-primary");
           $button.text(topics[i]);
           $button.attr("data-topic", topics[i]);
           $("#buttons").append($button);
@@ -55,6 +57,7 @@ $(document).ready(() => {
 
 
     $(document).on("click", "button", function() {
+        $('.col-sm-12').css('display', 'block');
         var topic = $(this).attr("data-topic");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         topic + "&api_key=Iu7O2yvrkQkP0gGkAWyITP4oK1rspQjn&limit=10";

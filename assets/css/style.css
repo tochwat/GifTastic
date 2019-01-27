@@ -64,12 +64,50 @@ p {
     line-height: 1em;
 }
 
+.form-control {
+    width: 300px;
+    display: inline-block;
+}
+
+.btn {
+    margin: 5px;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #3a81b7;
     border-color: #3a81b7;
-    margin: 15px;
 }
+
+
+.col-sm-12 {
+    display: none;
+}
+
+.wrapper {
+    background-color: #f3f3f3;
+    border-radius: 25px;
+    padding: 20px 25px;
+    box-shadow: 1px 2px 10px grey;
+    margin: 40px;
+}
+
+
+.row {
+    padding: 1vh;
+    align-items: center;
+    justify-content: center;
+}
+
+#gifs-appear-here {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#gifs-appear-here > div {
+    flex: 1;
+}
+
 
 
 footer {
